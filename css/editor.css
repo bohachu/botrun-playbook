@@ -1,0 +1,427 @@
+/* 編輯器面板 */
+.editor-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-4);
+    border-bottom: 1px solid #E5E7EB;
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.editor-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--dark-gray);
+    margin: 0;
+}
+
+.editor-actions {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+}
+
+/* 編輯器容器 */
+.editor-container {
+    flex: 1;
+    padding: var(--spacing-4);
+    background: var(--white);
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* CK Editor 自定義樣式 */
+.ck-editor {
+    border: 1px solid #D1D5DB;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.ck-editor__top {
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.ck-toolbar {
+    background: var(--light-gray) !important;
+    border: none !important;
+    padding: var(--spacing-3) !important;
+}
+
+.ck-toolbar .ck-toolbar__items {
+    gap: var(--spacing-1);
+}
+
+.ck-button {
+    border-radius: var(--border-radius-sm) !important;
+    transition: all 0.2s ease !important;
+}
+
+.ck-button:hover {
+    background: var(--secondary-blue) !important;
+    transform: translateY(-1px);
+}
+
+.ck-button.ck-on {
+    background: var(--primary-blue) !important;
+    color: var(--white) !important;
+}
+
+.ck-editor__main {
+    min-height: calc(100vh - 200px);
+}
+
+.ck-content {
+    font-family: var(--font-family) !important;
+    font-size: var(--font-size-base) !important;
+    line-height: 1.6 !important;
+    padding: var(--spacing-6) !important;
+    min-height: calc(100vh - 200px) !important;
+    background: var(--white) !important;
+}
+
+.ck-content:focus {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* RFP 文件樣式 */
+.ck-content h1 {
+    color: var(--primary-blue);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin: var(--spacing-8) 0 var(--spacing-4) 0;
+    padding-bottom: var(--spacing-2);
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.ck-content h2 {
+    color: var(--dark-gray);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    margin: var(--spacing-6) 0 var(--spacing-3) 0;
+    padding-left: var(--spacing-2);
+    border-left: 4px solid var(--accent-green);
+}
+
+.ck-content h3 {
+    color: var(--dark-gray);
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    margin: var(--spacing-5) 0 var(--spacing-2) 0;
+}
+
+.ck-content h4 {
+    color: var(--neutral-gray);
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    margin: var(--spacing-4) 0 var(--spacing-2) 0;
+}
+
+.ck-content p {
+    margin: var(--spacing-3) 0;
+    text-align: justify;
+}
+
+.ck-content ul,
+.ck-content ol {
+    margin: var(--spacing-3) 0;
+    padding-left: var(--spacing-6);
+}
+
+.ck-content li {
+    margin: var(--spacing-1) 0;
+}
+
+.ck-content blockquote {
+    background: var(--secondary-blue);
+    border-left: 4px solid var(--primary-blue);
+    padding: var(--spacing-4);
+    margin: var(--spacing-4) 0;
+    font-style: italic;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+.ck-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: var(--spacing-4) 0;
+    border: 1px solid #D1D5DB;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.ck-content table th {
+    background: var(--primary-blue);
+    color: var(--white);
+    padding: var(--spacing-3);
+    text-align: left;
+    font-weight: 600;
+}
+
+.ck-content table td {
+    padding: var(--spacing-3);
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.ck-content table tr:nth-child(even) {
+    background: var(--light-gray);
+}
+
+/* 特殊內容區塊 */
+.rfp-section {
+    background: var(--light-gray);
+    border: 1px solid #D1D5DB;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-4);
+    margin: var(--spacing-4) 0;
+}
+
+.rfp-section-title {
+    color: var(--primary-blue);
+    font-weight: 600;
+    margin-bottom: var(--spacing-2);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.rfp-section-content {
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+.placeholder-text {
+    color: var(--neutral-gray);
+    font-style: italic;
+    background: #FEF3C7;
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-sm);
+    border: 1px dashed var(--warning-yellow);
+}
+
+/* 編輯器狀態列 */
+.editor-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--light-gray);
+    border-top: 1px solid #E5E7EB;
+    font-size: var(--font-size-xs);
+    color: var(--neutral-gray);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+
+.sync-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.sync-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-green);
+    animation: pulse 2s infinite;
+}
+
+.sync-indicator.syncing {
+    background: var(--warning-yellow);
+    animation: blink 1s infinite;
+}
+
+.sync-indicator.error {
+    background: var(--error-red);
+    animation: none;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0.3;
+    }
+}
+
+/* 編輯器工具提示 */
+.editor-tooltip {
+    position: absolute;
+    background: var(--dark-gray);
+    color: var(--white);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-xs);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.editor-tooltip.show {
+    opacity: 1;
+}
+
+/* 內容高亮 */
+.content-highlight {
+    background: rgba(0, 102, 204, 0.1);
+    border-radius: var(--border-radius-sm);
+    padding: 0 var(--spacing-1);
+    animation: highlightFade 2s ease-out;
+}
+
+@keyframes highlightFade {
+    0% {
+        background: rgba(0, 102, 204, 0.3);
+    }
+
+    100% {
+        background: rgba(0, 102, 204, 0.1);
+    }
+}
+
+/* 編輯器載入狀態 */
+.editor-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+}
+
+.editor-loading .spinner {
+    width: 32px;
+    height: 32px;
+    margin-bottom: var(--spacing-4);
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+    .editor-container {
+        padding: var(--spacing-3);
+    }
+
+    .ck-content {
+        padding: var(--spacing-4) !important;
+        min-height: 300px !important;
+    }
+
+    .ck-editor__main {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .editor-header {
+        flex-direction: column;
+        gap: var(--spacing-3);
+        align-items: stretch;
+    }
+
+    .editor-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .editor-status {
+        flex-direction: column;
+        gap: var(--spacing-2);
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .ck-toolbar .ck-toolbar__items {
+        flex-wrap: wrap;
+    }
+
+    .ck-content h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .ck-content h2 {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* 列印樣式 */
+@media print {
+
+    .editor-header,
+    .editor-status,
+    .ck-toolbar {
+        display: none !important;
+    }
+
+    .editor-container {
+        padding: 0;
+    }
+
+    .ck-content {
+        padding: 0 !important;
+        min-height: auto !important;
+    }
+
+    .ck-editor {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+/* 無障礙設計 */
+.ck-button:focus {
+    outline: 2px solid var(--primary-blue) !important;
+    outline-offset: 2px !important;
+}
+
+/* 高對比模式 */
+@media (prefers-contrast: high) {
+    .ck-editor {
+        border: 2px solid var(--dark-gray);
+    }
+
+    .ck-toolbar {
+        background: var(--white) !important;
+        border-bottom: 2px solid var(--dark-gray) !important;
+    }
+
+    .ck-content h1,
+    .ck-content h2 {
+        color: var(--dark-gray);
+    }
+}
