@@ -218,29 +218,43 @@ class ChatComponent {
      * 格式化訊息內容
      */
     formatMessageContent(content) {
+        console.log('🎨 格式化訊息內容:', content);
+
+        if (!content) {
+            console.log('🎨 內容為空，返回空字串');
+            return '';
+        }
+
         // 簡單的 Markdown 格式支援
-        let formatted = content;
+        let formatted = content.toString();
 
-        // 粗體 **text**
-        formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        try {
+            // 粗體 **text**
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
-        // 斜體 *text*
-        formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // 斜體 *text*
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
-        // 程式碼 `code`
-        formatted = formatted.replace(/`(.*?)`/g, '<code>$1</code>');
+            // 程式碼 `code`
+            formatted = formatted.replace(/`(.*?)`/g, '<code>$1</code>');
 
-        // 換行
-        formatted = formatted.replace(/\n/g, '<br>');
+            // 換行
+            formatted = formatted.replace(/\n/g, '<br>');
 
-        // 連結 [text](url)
-        formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+            // 連結 [text](url)
+            formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
 
-        // 列表項目 • item
-        formatted = formatted.replace(/^• (.+)$/gm, '<li>$1</li>');
-        formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+            // 列表項目 • item
+            formatted = formatted.replace(/^• (.+)$/gm, '<li>$1</li>');
+            formatted = formatted.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
 
-        return formatted;
+            console.log('🎨 格式化完成，結果長度:', formatted.length);
+            return formatted;
+
+        } catch (error) {
+            console.error('❌ 格式化訊息內容失敗:', error);
+            return content.toString(); // 返回原始內容
+        }
     }
 
     /**
@@ -396,11 +410,23 @@ class ChatComponent {
      * 渲染所有訊息
      */
     renderMessages() {
+        console.log('🎨 渲染訊息，訊息數量:', this.messages.length);
+        console.log('🎨 messagesContainer 狀態:', !!this.messagesContainer);
+
+        if (!this.messagesContainer) {
+            console.error('❌ messagesContainer 未定義，無法渲染訊息');
+            return;
+        }
+
         this.messagesContainer.innerHTML = '';
 
         this.messages.forEach(message => {
-            const messageElement = this.createMessageElement(message);
-            this.messagesContainer.appendChild(messageElement);
+            try {
+                const messageElement = this.createMessageElement(message);
+                this.messagesContainer.appendChild(messageElement);
+            } catch (error) {
+                console.error('❌ 渲染訊息失敗:', error, message);
+            }
         });
 
         this.scrollToBottom();

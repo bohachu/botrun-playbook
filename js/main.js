@@ -116,7 +116,22 @@ class AIManualIncubator {
         console.log('💬 初始化聊天元件...');
 
         try {
-            this.chatComponent = new ChatComponent();
+            // 獲取聊天相關的 DOM 元素
+            const messagesContainer = document.getElementById('chatMessages');
+            const inputElement = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendBtn');
+
+            console.log('💬 檢查 DOM 元素:', {
+                messagesContainer: !!messagesContainer,
+                inputElement: !!inputElement,
+                sendButton: !!sendButton
+            });
+
+            if (!messagesContainer || !inputElement || !sendButton) {
+                throw new Error('找不到必要的聊天 DOM 元素');
+            }
+
+            this.chatComponent = new ChatComponent(messagesContainer, inputElement, sendButton);
             console.log('✅ 聊天元件初始化完成');
         } catch (error) {
             console.error('❌ 聊天元件初始化失敗:', error);
@@ -140,7 +155,7 @@ class AIManualIncubator {
         console.log('🔄 初始化同步管理器...');
 
         try {
-            this.syncManager = new SyncManager(this.editorWrapper, this.chatComponent);
+            this.syncManager = new SyncManager(this.chatComponent, this.editorWrapper, null);
             console.log('✅ 同步管理器初始化完成');
         } catch (error) {
             console.error('❌ 同步管理器初始化失敗:', error);
@@ -251,11 +266,15 @@ class AIManualIncubator {
         if (this.chatComponent) {
             // 延遲顯示歡迎訊息，讓使用者看到載入過程
             setTimeout(() => {
-                this.chatComponent.addMessage(
-                    window.mockChatResponses.welcome,
-                    'ai',
-                    new Date()
-                );
+                const welcomeMessage = {
+                    id: `msg_${Date.now()}`,
+                    type: 'ai',
+                    content: '歡迎使用 AI手冊孵化器！我是您的 AI孵化器，將協助您撰寫專業的專案需求建議書。請選擇下方的引導功能開始，或直接與我對話描述您的需求。',
+                    timestamp: new Date()
+                };
+
+                console.log('👋 添加歡迎訊息:', welcomeMessage);
+                this.chatComponent.addMessage(welcomeMessage);
             }, 1000);
         }
     }
@@ -279,8 +298,9 @@ class AIManualIncubator {
     }
 
     triggerSync() {
-        if (this.syncManager) {
-            this.syncManager.syncContent();
+        if (this.syncManager && this.editor) {
+            const content = this.editor.getData();
+            this.syncManager.syncContent(content, 'editor');
         }
 
         // 更新同步狀態指示器

@@ -208,7 +208,8 @@ body::before {
     border-right: 1px solid var(--bg-tertiary);
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
     box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;
@@ -241,7 +242,8 @@ body::before {
     background: var(--bg-secondary);
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 80px);
+    height: calc(100vh - 80px);
+    max-height: calc(100vh - 80px);
     box-shadow: var(--shadow-sm);
     position: relative;
     overflow: hidden;

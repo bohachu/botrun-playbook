@@ -3,7 +3,10 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    /* 使用完整高度 */
     min-height: 0;
+    /* 允許 flex 子元素縮小 */
     order: 1;
     /* 確保聊天區域在上方 */
 }
@@ -16,6 +19,8 @@
     border-bottom: 1px solid var(--bg-tertiary);
     background: var(--bg-secondary);
     position: relative;
+    flex-shrink: 0;
+    /* 防止標題被壓縮 */
 }
 
 .chat-header::after {
@@ -42,13 +47,17 @@
 /* 訊息區域 */
 .chat-messages {
     flex: 1;
+    /* 佔用剩餘空間 */
     overflow-y: auto;
+    /* 允許垂直滾動 */
     padding: var(--spacing-4);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-4);
     background: linear-gradient(135deg, #FAFBFC 0%, #F8F9FA 100%);
     position: relative;
+    min-height: 0;
+    /* 允許縮小 */
 }
 
 .chat-messages::before {
@@ -212,6 +221,8 @@
     background: var(--bg-secondary);
     border-top: 1px solid var(--bg-tertiary);
     position: relative;
+    flex-shrink: 0;
+    /* 防止輸入區域被壓縮 */
 }
 
 .chat-input-container::before {
@@ -316,6 +327,12 @@
     order: 2;
     /* 確保引導按鈕在下方 */
     position: relative;
+    flex-shrink: 0;
+    /* 防止引導按鈕區域被壓縮 */
+    max-height: 200px;
+    /* 限制最大高度 */
+    overflow-y: auto;
+    /* 如果內容太多，允許滾動 */
 }
 
 .guidance-buttons::before {
